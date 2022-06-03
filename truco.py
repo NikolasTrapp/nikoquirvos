@@ -151,10 +151,7 @@ class Truco:
         for _ in range(1, 4): #numero de rounds da rodada
             maior = 0 #definir a carta mais forte
             print("="*60) #print random
-            '''print(*self.player1)
-            print(*self.player2)
-            print(*self.player3)
-            print(*self.player4)'''#mostrar as cartas de todos
+            print(f"Placar: Time 1 {t1} x {t2} Time 2")
             print("RODADA: "+str(_)) #sinalizar a rodada
 
             for player in jogadores:
@@ -169,9 +166,8 @@ class Truco:
                 if self.cartas[carta[0]][carta[1]] > maior:
                     maior = self.cartas[carta[0]][carta[1]]
                     pontuador = player
-                    print(f"o pontuador atual é o {pontuador} com uma carta de peso {maior}")
                 elif self.cartas[carta[0]][carta[1]] == maior:
-                    if int(player[0][-1]) % 2 == 0 and int(pontuador[0][-1]) % 2 == 0 or int(player[0][-1]) % 2 != 0 and int(pontuador[0][-1]) % 2 != 0:
+                    if player[0][-1] == "1" and pontuador[0][-1] == "3" or player[0][-1] == "2" and pontuador[0][-1] == "4":
                         maior = self.cartas[carta[0]][carta[1]]
                         pontuador = player
                     else:
@@ -182,10 +178,31 @@ class Truco:
             
             print(f"{pontuador[0]} venceu esta rodada")
             string_random = string_random[:-4]+")"
+
             if pontuador[0] != "ninguém":
                 jogadores = jogadores[jogadores.index(pontuador):]+ jogadores[:jogadores.index(pontuador)]
+
+            if pontuador[0] == "jogador 1" or pontuador[0] == "jogador 3":
+                t1 += 1
+            elif pontuador[0] == "jogador 2" or pontuador[0] == "jogador 4":
+                t2 += 1
+
+            if t1 == 2 and t2 == 2:
+                print("Quem fizer ganha!")
+            elif t1 >= 2:
+                self.pontos_time1 += 1
+                print("Time 1 ganhou!!!")
+                break
+            elif t2 >= 2:
+                self.pontos_time2 += 1
+                print("Time 2 ganhou")
+                break
+            
+            
+                
          
 
 truco = Truco()
-while True:
+while truco.pontos_time1 < 12 or truco.pontos_time2 < 12:
+    print(f"Frango pelado {truco.pontos_time1} x {truco.pontos_time2} Urubu de chão")
     truco.distribuir_cartas()
