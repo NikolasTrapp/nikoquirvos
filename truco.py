@@ -173,34 +173,29 @@ class Truco:
                     else:
                         maior = self.cartas[carta[0]][carta[1]]
                         pontuador = ["ninguém"]
-
+   
                 player.remove(carta)
             
             print(f"{pontuador[0]} venceu esta rodada")
             string_random = string_random[:-4]+")"
 
-            if pontuador[0] != "ninguém":
+            if pontuador[0] != 'ninguém':
                 jogadores = jogadores[jogadores.index(pontuador):]+ jogadores[:jogadores.index(pontuador)]
-
-            if pontuador[0] == "jogador 1" or pontuador[0] == "jogador 3":
+                if pontuador[0] == 'jogador 1' or pontuador[0] == 'jogador 3':
+                    t1 += 1
+                elif pontuador[0] == 'jogador 2' or pontuador[0] == 'jogador 4':
+                    t2 += 1
+            else:
                 t1 += 1
-            elif pontuador[0] == "jogador 2" or pontuador[0] == "jogador 4":
-                t2 += 1
+                t2 += 2
 
-            if t1 == 2 and t2 == 2:
-                print("Quem fizer ganha!")
-            elif t1 >= 2:
+            if t1 >= 2:
                 self.pontos_time1 += 1
-                print("Time 1 ganhou!!!")
                 break
             elif t2 >= 2:
                 self.pontos_time2 += 1
-                print("Time 2 ganhou")
                 break
-            
-            
-                
-         
+
 
 truco = Truco()
 while truco.pontos_time1 < 12 or truco.pontos_time2 < 12:
